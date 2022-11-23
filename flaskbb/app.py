@@ -232,7 +232,8 @@ def configure_extensions(app):
     themes.init_themes(app, app_identifier="flaskbb")
 
     # Flask-And-Redis
-    redis_store.init_app(app)
+    if app.config.get('REDIS_ENABLED', False):
+        redis_store.init_app(app)
 
     # Flask-Limiter
     limiter.init_app(app)
